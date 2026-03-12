@@ -1,0 +1,85 @@
+{
+  "name": "monult",
+  "version": "1.0.1",
+  "description": "Multi-Model AI Operating System for Developers — orchestrate, debate, and verify across AI models",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "bin": {
+    "monult": "./dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "build:css": "tailwindcss -i ./dashboard/css/tailwind.css -o ./dashboard/css/main.css",
+    "build:all": "npm run build:css && npm run build",
+    "dev": "ts-node src/cli/index.ts",
+    "start": "node dist/cli/index.js",
+    "test": "jest --passWithNoTests",
+    "lint": "eslint src/",
+    "dashboard": "cd dashboard && npx serve -l 3001 ."
+  },
+  "keywords": [
+    "ai",
+    "llm",
+    "multi-model",
+    "orchestration",
+    "agents",
+    "openai",
+    "claude",
+    "gemini",
+    "ai-framework",
+    "developer-tools"
+  ],
+  "author": "Monult Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rohanvanvi/Monult.git"
+  },
+  "homepage": "https://github.com/rohanvanvi/Monult",
+  "bugs": {
+    "url": "https://github.com/rohanvanvi/Monult/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@types/inquirer": "^9.0.9",
+    "bcryptjs": "^3.0.3",
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.3.1",
+    "express": "^4.22.1",
+    "heapdump": "^0.3.15",
+    "inquirer": "^9.3.8",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.2.4",
+    "ora": "^8.1.0",
+    "pg": "^8.20.0",
+    "redis": "^5.11.0",
+    "swagger-ui-express": "^5.0.1",
+    "systeminformation": "^5.31.3",
+    "uuid": "^10.0.0",
+    "winston": "^3.14.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.0.0",
+    "@types/swagger-ui-express": "^4.1.8",
+    "@types/uuid": "^10.0.0",
+    "autoprefixer": "^10.4.27",
+    "jest": "^29.7.0",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.19",
+    "ts-jest": "^29.2.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.6.0"
+  }
+}

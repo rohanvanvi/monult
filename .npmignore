@@ -1,0 +1,9 @@
+src
+dashboard
+docs
+examples
+.vscode
+.github
+tests
+node_modules
+*.log

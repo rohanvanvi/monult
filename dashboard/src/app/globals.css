@@ -1,0 +1,274 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Monult OS Design System ─── */
+:root {
+  color-scheme: dark;
+  /* Surfaces */
+  --bg-root: #0a0a0f;
+  --bg-primary: #101018;
+  --bg-card: #14141f;
+  --bg-elevated: #1a1a2e;
+  --bg-hover: #1e1e30;
+  --bg-active: #252540;
+
+  /* Text */
+  --text-primary: #f0f0f5;
+  --text-secondary: #b0b0c8;
+  --text-muted: #6b6b8a;
+  --text-faint: #44445a;
+
+  /* Borders */
+  --border: #22223a;
+  --border-focus: #4040ff;
+
+  /* Accents */
+  --accent-blue: #4f6ef7;
+  --accent-purple: #9b5de5;
+  --accent-green: #2dd4a8;
+  --accent-amber: #f5a623;
+  --accent-red: #ef4444;
+  --accent-cyan: #06d6f0;
+
+  /* Glow */
+  --glow-blue: rgba(79, 110, 247, 0.15);
+  --glow-purple: rgba(155, 93, 229, 0.15);
+  --glow-green: rgba(45, 212, 168, 0.10);
+}
+
+/* Map to shadcn/ui tokens */
+@layer base {
+  :root {
+    --radius: 0.625rem;
+  }
+
+  .dark {
+    --background: 230 20% 5%;
+    --foreground: 240 10% 95%;
+    --card: 230 20% 8%;
+    --card-foreground: 240 10% 95%;
+    --popover: 230 20% 8%;
+    --popover-foreground: 240 10% 95%;
+    --primary: 230 90% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 230 15% 14%;
+    --secondary-foreground: 240 10% 95%;
+    --muted: 230 15% 14%;
+    --muted-foreground: 240 10% 56%;
+    --accent: 230 15% 18%;
+    --accent-foreground: 240 10% 95%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 233 25% 16%;
+    --input: 233 20% 18%;
+    --ring: 233 90% 58%;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--bg-root)] text-[var(--text-primary)] antialiased;
+    font-feature-settings: 'ss01', 'ss02', 'cv01';
+  }
+
+  * {
+    @apply border-[var(--border)];
+  }
+}
+
+/* ─── Animations ─── */
+@keyframes shimmer {
+  0% {
+    background-position: -500px 0;
+  }
+
+  100% {
+    background-position: 500px 0;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-soft {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.35s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out both;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+/* Stagger children */
+.stagger-children>* {
+  animation: slideUp 0.35s ease-out both;
+}
+
+.stagger-children>*:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.stagger-children>*:nth-child(2) {
+  animation-delay: 60ms;
+}
+
+.stagger-children>*:nth-child(3) {
+  animation-delay: 120ms;
+}
+
+.stagger-children>*:nth-child(4) {
+  animation-delay: 180ms;
+}
+
+.stagger-children>*:nth-child(5) {
+  animation-delay: 240ms;
+}
+
+.stagger-children>*:nth-child(6) {
+  animation-delay: 300ms;
+}
+
+/* Premium glass card */
+.glass-card {
+  background: linear-gradient(135deg, rgba(20, 20, 35, 0.85), rgba(20, 20, 35, 0.5));
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-faint);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ─── Markdown Rendering (.prose) ─── */
+.prose {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.prose ul,
+.prose ol {
+  margin-y: 8px;
+  padding-left: 20px;
+}
+
+.prose li {
+  margin-bottom: 4px;
+}
+
+.prose p {
+  margin-bottom: 12px;
+}
+
+.prose code {
+  background: #1e1e1e;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.9em;
+  color: var(--accent-cyan);
+}
+
+.prose pre {
+  background: #0f0f12;
+  padding: 14px;
+  border-radius: 10px;
+  overflow-x: auto;
+  margin-top: 12px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border);
+}
+
+/* Override inline code inside pre so it doesn't double-style */
+.prose pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  font-size: 0.85em;
+}
+
+.prose a {
+  color: var(--accent-blue);
+  text-decoration: underline;
+  text-decoration-color: var(--accent-blue);
+  text-underline-offset: 2px;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.prose th {
+  background: var(--bg-hover);
+  font-weight: 600;
+}

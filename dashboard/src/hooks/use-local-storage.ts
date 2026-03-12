@@ -1,0 +1,49 @@
+import { useState, useEffect } from 'react';
+
+export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T | ((val: T) => T)) => void] {
+    const [storedValue, setStoredValue] = useState<T>(() => {
+        if (typeof window === "undefined") {
+            return initialValue;
+        }
+        try {
+            const item = window.localStorage.getItem(key);
+            return item ? JSON.parse(item) : initialValue;
+        } catch (error) {
+            console.warn(`Error reading localStorage key "${key}":`, error);
+            return initialValue;
+        }
+    });
+
+    const setValue = (value: T | ((val: T) => T)) => {
+        setStoredValue((prev) => {
+            try {
+                const valueToStore = value instanceof Function ? value(prev) : value;
+                if (typeof window !== "undefined") {
+                    window.localStorage.setItem(key, JSON.stringify(valueToStore));
+                    window.dispatchEvent(new Event("monult-storage-update"));
+                }
+                return valueToStore;
+            } catch (error) {
+                console.warn(`Error setting localStorage key "${key}":`, error);
+                return prev;
+            }
+        });
+    };
+
+    useEffect(() => {
+        const handleStorageChange = () => {
+            try {
+                const item = window.localStorage.getItem(key);
+                if (item) setStoredValue(JSON.parse(item));
+            } catch (error) { }
+        };
+        window.addEventListener("storage", handleStorageChange);
+        window.addEventListener("monult-storage-update", handleStorageChange);
+        return () => {
+            window.removeEventListener("storage", handleStorageChange);
+            window.removeEventListener("monult-storage-update", handleStorageChange);
+        };
+    }, [key]);
+
+    return [storedValue, setValue];
+}
